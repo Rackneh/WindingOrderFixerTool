@@ -2,11 +2,11 @@
 # Winding Order Fixer Tool
 
 This is a general purpose winding order fixer. It bruteforces the winding order.
-![Before](https://imgur.com/xeBx1JI)
-![After](https://imgur.com/DLq8v4W)
+![Before](https://i.imgur.com/xeBx1JI.png)
+![After](https://i.imgur.com/DLq8v4W.png)
 
 Now Oven-Ready!
-![Bakable](https://imgur.com/ff56wbY)
+![Bakable](https://i.imgur.com/ff56wbY.png)
 
 ## Usage
  
