@@ -3,7 +3,7 @@
 
 This is a general purpose winding order fixer. It bruteforces the winding order.
 
-![Before](https://i.imgur.com/wwhweBJ.png)
+![Before](https://i.imgur.com/GKyIdXW.png)
 ![After](https://i.imgur.com/m0qzZpJ.png)
 
 Now Oven-Ready!
