@@ -6,6 +6,13 @@ This is a general purpose winding order fixer. It bruteforces the winding order.
 ![Before](https://i.imgur.com/VOCEXHl.png)
 ![After](https://i.imgur.com/m0qzZpJ.png)
 
+## Acknowledgements
+
+ - [My good friend Usling123](https://media.tenor.com/mT9nMqyFXToAAAAM/handshake-predator.gif)
+ - [8BitGoose's Ascii FBX Exporter](https://muse.unity.com](https://assetstore.unity.com/packages/tools/modeling/ascii-fbx-exporter-for-unity-231226)) For the unity tool!
+ - [ChatGPT 3.5](https://OpenAI.com)
+ - [Muse](https://muse.unity.com)
+
 Now Oven-Ready!
 
 ![Bakable](https://i.imgur.com/ff56wbY.png)
@@ -42,10 +49,4 @@ Step 4
     ## 🔗 Links
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3DRackneh%26type%3Dpatrons&style=flat)](https://patreon.com/Rackneh)
 
-## Acknowledgements
-
- - [My good friend Usling123](https://media.tenor.com/mT9nMqyFXToAAAAM/handshake-predator.gif)
- - [8BitGoose's Ascii FBX Exporter](https://muse.unity.com](https://assetstore.unity.com/packages/tools/modeling/ascii-fbx-exporter-for-unity-231226)) For the unity tool!
- - [ChatGPT 3.5](https://OpenAI.com)
- - [Muse](https://muse.unity.com)
 
