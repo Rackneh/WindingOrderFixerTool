@@ -2,6 +2,7 @@
 # Winding Order Fixer Tool
 
 This is a general purpose winding order fixer. It bruteforces the winding order.
+
 ![Before](https://i.imgur.com/wwhweBJ.png)
 ![After](https://i.imgur.com/m0qzZpJ.png)
 
