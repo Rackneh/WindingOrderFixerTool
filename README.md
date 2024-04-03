@@ -9,7 +9,7 @@ This is a general purpose winding order fixer. It bruteforces the winding order.
 ## Acknowledgements
 
  - [My good friend Usling123](https://media.tenor.com/mT9nMqyFXToAAAAM/handshake-predator.gif)
- - [8BitGoose's Ascii FBX Exporter](https://muse.unity.com](https://assetstore.unity.com/packages/tools/modeling/ascii-fbx-exporter-for-unity-231226)) For the unity tool!
+ - [8BitGoose's Ascii FBX Exporter](https://muse.unity.com](https://assetstore.unity.com/packages/tools/modeling/ascii-fbx-exporter-for-unity-231226)) For the unity runtime exporter tool!
  - [ChatGPT 3.5](https://OpenAI.com)
  - [Muse](https://muse.unity.com)
 
