@@ -46,7 +46,9 @@ Step 4
 
 
 
-    ## 🔗 Links
+## 🔗 Links
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3DRackneh%26type%3Dpatrons&style=flat)](https://patreon.com/Rackneh)
 
+## Help!
 
+If you want to help make this into a true application or need help using this one, my discord username is Rackneh as well there.
