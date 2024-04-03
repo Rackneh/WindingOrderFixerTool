@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEditor;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using RuntimeFbx;
 using AsciiFBXExporter;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
 
