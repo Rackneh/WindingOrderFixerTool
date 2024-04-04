@@ -107,18 +107,44 @@ public class Main : MonoBehaviour
         }
     }
 
+
     public void FlipNormals(GameObject obj)
     {
         MeshFixer meshFixer = obj.GetComponent<MeshFixer>();
         if (meshFixer != null)
         {
             meshFixer.FixNormals(obj.transform, 0.01f);
-        }
+            // Debug.Log("Fixed normals for " + obj.name);
 
-        for (int i = 0; i < obj.transform.childCount; i++)
+            Transform firstChild = obj.transform.GetChild(0);
+            if (firstChild != null)
+            {
+                if (firstChild.childCount == 0)
+                {
+                    ProcessChild(firstChild, meshFixer);
+                }
+                else
+                {
+                    // Debug.Log("Using MeshFixer from first child of objectPosition.");
+                    for (int i = 0; i < firstChild.transform.childCount; i++)
+                    {
+                        Transform child = firstChild.transform.GetChild(i);
+                        ProcessChild(child, meshFixer);
+                    }
+                }
+            }
+            // Debug.Log("Fixed normals for all children of " + obj.name);
+        }
+    }
+
+    private void ProcessChild(Transform child, MeshFixer meshFixer)
+    {
+        // Debug.Log("Processing child: " + child.name);
+        // Check if the child has a MeshRenderer or SkinnedMeshRenderer
+        if (child.GetComponent<MeshRenderer>() != null || child.GetComponent<SkinnedMeshRenderer>() != null)
         {
-            Transform child = obj.transform.GetChild(i);
-            FlipNormals(child.gameObject);
+            meshFixer.FixNormals(child.transform, 0.01f);
+            // Debug.Log("Fixed normals for " + child.name);
         }
     }
 }
