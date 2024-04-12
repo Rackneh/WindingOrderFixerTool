@@ -1,7 +1,7 @@
 
 # Winding Order Fixer Tool
 
-This is a general purpose winding order fixer. It bruteforces the winding order.
+This is a general purpose winding order fixer. It bruteforces the indices winding order of any mesh.
 
 ![Before](https://i.imgur.com/VOCEXHl.png)
 ![After](https://i.imgur.com/m0qzZpJ.png)
