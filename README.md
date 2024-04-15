@@ -21,7 +21,7 @@ Now Oven-Ready!
  
 Install unity Editor 2022.3
 
-	// If you are following the MGS3VR instructions you can ignore this.
+	// If you are following the MGS3VR instructions you can ignore this tutorial, there should be instructions included in the client.
 
 Step 1 
 
