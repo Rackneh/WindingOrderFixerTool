@@ -32,19 +32,25 @@ public class MeshFixer : MonoBehaviour
         }
 
         Vector3[] vertices = mesh.vertices;
+        Vector3[] normals = mesh.normals;
+        Vector2[] uvs = mesh.uv;
+        int[] triangles = mesh.triangles;
+
         List<Vector3> newVertices = new List<Vector3>();
         List<Vector3> newNormals = new List<Vector3>();
         List<Vector2> newUvs = new List<Vector2>();
-        int[] triangles = mesh.triangles;
+        List<BoneWeight> newBoneWeights = new List<BoneWeight>();
 
-        // Create a dictionary to store shared edge data
-        Dictionary<string, List<int>> sharedEdges = new Dictionary<string, List<int>>();
-        // Create an array to track which triangles need to be flipped
-        bool[] needsFlip = new bool[triangles.Length / 3];
-
-        // Store the original vertex indices for each merged vertex
+        // Dictionary to map old vertices to new vertices
         Dictionary<int, int> vertexMapping = new Dictionary<int, int>();
         int newIndex = 0;
+
+        // Check if it's a skinned mesh and handle bone weights
+        BoneWeight[] boneWeights = null;
+        if (skinnedMeshRenderer != null)
+        {
+            boneWeights = mesh.boneWeights;
+        }
 
         // Store the original vertex indices for each merged vertex
         Dictionary<int, List<int>> mergedIndices = new Dictionary<int, List<int>>();
@@ -59,7 +65,7 @@ public class MeshFixer : MonoBehaviour
                 {
                     // Merge vertices by averaging their positions
                     newVertices[j] = (newVertices[j] + vertices[i]) / 2f;
-                    newNormals[j] = (newNormals[j] + mesh.normals[i]) / 2f; // Update normal by averaging
+                    newNormals[j] = (newNormals[j] + normals[i]) / 2f; // Update normal by averaging
                     vertexMapping[i] = j;
                     mergedIndices[j].Add(i);
                     merged = true;
@@ -70,34 +76,40 @@ public class MeshFixer : MonoBehaviour
             if (!merged)
             {
                 newVertices.Add(vertices[i]);
-                newNormals.Add(mesh.normals[i] * -1); // Invert normals
+                newNormals.Add(normals[i] * -1); // Invert normals
+                newUvs.Add(uvs[i]);
 
-                newUvs.Add(mesh.uv[i]);
+                if (boneWeights != null)
+                {
+                    newBoneWeights.Add(boneWeights[i]);
+                }
+
                 vertexMapping[i] = newIndex;
                 mergedIndices[newIndex] = new List<int> { i };
                 newIndex++;
             }
         }
 
+        // Update triangles with new vertex indices
+        for (int i = 0; i < triangles.Length; i++)
+        {
+            triangles[i] = vertexMapping[triangles[i]];
+        }
+
         // Calculate face normals and populate the shared edges dictionary
+        Dictionary<string, List<int>> sharedEdges = new Dictionary<string, List<int>>();
+        bool[] needsFlip = new bool[triangles.Length / 3];
+
         for (int i = 0; i < triangles.Length; i += 3)
         {
             Vector3 dir1 = newVertices[triangles[i + 1]] - newVertices[triangles[i]];
             Vector3 dir2 = newVertices[triangles[i + 2]] - newVertices[triangles[i]];
             Vector3 faceNormal = Vector3.Cross(dir1, dir2).normalized;
 
-            // Calculate average normal of adjacent triangles
-            Vector3 avgNormal = Vector3.zero;
-            for (int j = 0; j < 3; j++)
-            {
-                avgNormal += newNormals[triangles[i + j]];
-            }
-            avgNormal /= 3f;
+            Vector3 avgNormal = (newNormals[triangles[i]] + newNormals[triangles[i + 1]] + newNormals[triangles[i + 2]]) / 3f;
 
-            // Make sure the normal faces outward
             if (Vector3.Dot(faceNormal, avgNormal) < 0)
             {
-                // Flip the triangle to ensure the normal faces outward
                 int temp = triangles[i];
                 triangles[i] = triangles[i + 2];
                 triangles[i + 2] = temp;
@@ -117,7 +129,6 @@ public class MeshFixer : MonoBehaviour
             }
         }
 
-        // Iterate through shared edges and check for opposite face normals
         foreach (KeyValuePair<string, List<int>> kvp in sharedEdges)
         {
             if (kvp.Value.Count == 2)
@@ -127,8 +138,6 @@ public class MeshFixer : MonoBehaviour
 
                 if (needsFlip[triangleIndexA / 3] != needsFlip[triangleIndexB / 3])
                 {
-                    // If the shared edge is between two triangles with different flip statuses,
-                    // flip the status
                     needsFlip[triangleIndexA / 3] = !needsFlip[triangleIndexA / 3];
                     needsFlip[triangleIndexB / 3] = !needsFlip[triangleIndexB / 3];
                 }
@@ -140,6 +149,11 @@ public class MeshFixer : MonoBehaviour
         mesh.normals = newNormals.ToArray();
         mesh.uv = newUvs.ToArray();
         mesh.triangles = triangles;
-        //mesh.RecalculateNormals();
+
+        if (skinnedMeshRenderer != null)
+        {
+            mesh.boneWeights = newBoneWeights.ToArray();
+            mesh.bindposes = mesh.bindposes;
+        }
     }
 }
