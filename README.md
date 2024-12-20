@@ -19,7 +19,9 @@ Now Oven-Ready!
 
 ## Usage
  
-Install unity Editor 2022.3
+Install unity Editor 2022.3 inside of Unity Hub.
+If you are able to set the project up yourself and know how to, download the latest release.
+If not, Clone this git or download the zip above and import it as a project in Unity Hub.
 
 	// If you are following the MGS3VR instructions you can ignore this tutorial, there should be instructions included in the client.
 
